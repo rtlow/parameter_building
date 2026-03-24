@@ -10,7 +10,6 @@
 #SBATCH --constraint "intel"
 #SBATCH --constraint=ib
 #SBATCH -o /home/r408l055/scratch/logs/%x.%j.out
-#SBATCH -e /home/r408l055/scratch/logs/%x.%j.err
 
 # Which code directory
 i=1
@@ -26,8 +25,8 @@ FINAL_SNAP="${OUTDIR}/2cDM_DREAMS_MW_zooms_116_DM_power00_sigma1_dir_1_Vkick100.
 RESTART_DIR="${OUTDIR}/2cDM_DREAMS_MW_zooms_116_DM_power00_sigma1_dir_1_Vkick100.00/restartfiles/"
 JOBNAME=$SLURM_JOB_NAME
 PARAM='2cDM_DREAMS_MW_zooms_116_DM_power00_sigma1_dir_1_Vkick100.00.txt'
-PARAM_PATH="../RUNS/811/${PARAM}"
-LOG_PATH=/home/r408l055/scratch/logs/LOG_${JOBNAME}_$(date +"%Y_%m_%d_%H_%M_%S")
+PARAM_PATH="../RUNS/DREAMS_MW_zooms/${PARAM}"
+LOG_PATH=/home/r408l055/scratch/logs/LOG_${JOBNAME}_$SLURM_JOB_ID
 
 # Flags for iteration go/no-go
 RESTART_EXISTS=1

@@ -1,33 +1,32 @@
 #!/bin/bash
-#SBATCH --nodes=4
+#SBATCH --nodes=2
 #SBATCH --ntasks-per-node=32
 #SBATCH --mem-per-cpu=8g
 #SBATCH --time=6:00:00
 #SBATCH --mail-user=rtlow@ku.edu
 #SBATCH --mail-type=ALL
-#SBATCH --job-name=CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00
+#SBATCH --job-name=CDM_DREAMS_MW_zooms_116_DM_dir_3
 #SBATCH --partition=sixhour
 #SBATCH --constraint "intel"
 #SBATCH --constraint=ib
 #SBATCH -o /home/r408l055/scratch/logs/%x.%j.out
-#SBATCH -e /home/r408l055/scratch/logs/%x.%j.err
 
 # Which code directory
-i=2
+i=3
 # Is this a restart run?
 RESTART=1
 # Point to output directory
 OUTDIR="/home/r408l055/scratch/output"
 # Point to final snapshot
-FINAL_SNAP="${OUTDIR}/CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00/snap_127.hdf5"
+FINAL_SNAP="${OUTDIR}/CDM_DREAMS_MW_zooms_116_DM_dir_3/snap_127.hdf5"
 
 
 # Modification is rarely needed
-RESTART_DIR="${OUTDIR}/CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00/restartfiles/"
+RESTART_DIR="${OUTDIR}/CDM_DREAMS_MW_zooms_116_DM_dir_3/restartfiles/"
 JOBNAME=$SLURM_JOB_NAME
-PARAM='CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00.txt'
-PARAM_PATH="../RUNS/811/${PARAM}"
-LOG_PATH=/home/r408l055/scratch/logs/LOG_${JOBNAME}_$(date +"%Y_%m_%d_%H_%M_%S")
+PARAM='CDM_DREAMS_MW_zooms_116_DM_dir_3.txt'
+PARAM_PATH="../RUNS/DREAMS_MW_zooms/${PARAM}"
+LOG_PATH=/home/r408l055/scratch/logs/LOG_${JOBNAME}_$SLURM_JOB_ID
 
 # Flags for iteration go/no-go
 RESTART_EXISTS=1
@@ -52,8 +51,8 @@ N_RESTART=$(($SLURM_JOB_NUM_NODES*$SLURM_NTASKS_PER_NODE))
 if [ -f "$FINAL_SNAP" ]; then
 	N_FINAL_SNAP_EXISTS=0
 	echo "Final snapshot for Job $JOBNAME was written. Bye!"
-  ~/run-gen-pk-submit.sh "${OUTDIR}/CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00/"
-  sbatch ~/run-rockstar-dir.sh "${OUTDIR}/CDM_DREAMS_MW_zooms_116_HY_dir_2_Vkick100.00/"
+  ~/run-gen-pk-submit.sh "${OUTDIR}/CDM_DREAMS_MW_zooms_116_DM_dir_3/"
+  sbatch ~/run-rockstar-dir.sh "${OUTDIR}/CDM_DREAMS_MW_zooms_116_DM_dir_3/"
 else
   N_FINAL_SNAP_EXISTS=1
   echo "Still snapshots to go..."

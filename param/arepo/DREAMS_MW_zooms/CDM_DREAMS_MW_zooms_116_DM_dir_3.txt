@@ -1,5 +1,5 @@
 InitCondFile                                      ../RUNS/DREAMS_MW_zooms/ics_116
-OutputDir                                         /home/r408l055/scratch/output/CDM_DREAMS_MW_zooms_116_DM_dir_3_Vkick100.00
+OutputDir                                         /home/r408l055/scratch/output/CDM_DREAMS_MW_zooms_116_DM_dir_3
 SnapshotFileBase                                  snap
 OutputListFilename                                ../TNGfiles/ExpansionList_128
 ICFormat                                          3

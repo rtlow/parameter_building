@@ -44,7 +44,7 @@ RESTART_DIR="${OUTDIR}/{__JOBSTRING__}/restartfiles/"
 JOBNAME=$SLURM_JOB_NAME
 PARAM='{__PARAM_FILE__}'
 PARAM_PATH="../RUNS/boxes/${PARAM}"
-LOG_PATH=/home/rtlow/scratch/logs/LOG_${JOBNAME}_$(date +"%Y_%m_%d_%H_%M_%S")
+LOG_PATH=/home/rtlow/scratch/logs/LOG_${JOBNAME}_$SLURM_JOB_ID
 
 # Flags for iteration go/no-go
 RESTART_EXISTS=1
