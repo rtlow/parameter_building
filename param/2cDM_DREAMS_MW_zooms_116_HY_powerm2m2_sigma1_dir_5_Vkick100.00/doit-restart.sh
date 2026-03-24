@@ -40,7 +40,7 @@ GO=0
 
 source /home/r408l055/modules.sh
 
-mpiexec ./Arepo $PARAM_PATH $RESTART > $LOG_PATH
+srun --mpi=pmix_v5 ./Arepo $PARAM_PATH $RESTART > $LOG_PATH
 
 ~/remove_core.sh
 
