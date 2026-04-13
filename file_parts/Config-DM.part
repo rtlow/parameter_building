@@ -1,1 +1,2 @@
 FOF_SECONDARY_LINK_TYPES=4   # 2^type for the types linked to nearest primaries
+INDIVIDUAL_GRAVITY_SOFTENING=32  # bitmask with particle types where the softenig type should be chosen with that of parttype 1 as a reference type

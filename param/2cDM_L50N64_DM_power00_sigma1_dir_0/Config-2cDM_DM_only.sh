@@ -14,8 +14,9 @@ ENFORCE_JEANS_STABILITY_OF_CELLS    # this imposes an adaptive floor for the tem
 EVALPOTENTIAL                 # computes gravitational potential
 NSOFTTYPES=6                  # Number of different softening values to which particle types can be mapped.
 MULTIPLE_NODE_SOFTENING       # If a tree node is to be used which is softened, this is done with the softenings of its different mass components 
+INDIVIDUAL_GRAVITY_SOFTENING=32  # bitmask with particle types where the softenig type should be chosen with that of parttype 1 as a reference type
 ADAPTIVE_HYDRO_SOFTENING
-PMGRID={$PMGRID_SIZE}
+PMGRID=256
 RCUT=5.5
 PLACEHIGHRESREGION=2
 ENLARGEREGION=1.2
@@ -41,3 +42,8 @@ HAVE_HDF5                     # needed when HDF5 I/O support is desired
 DEBUG                         # enables core-dumps 
 HOST_MEMORY_REPORTING         # reports after start-up the available system memory by analyzing /proc/meminfo
 LONGIDS
+INPUT_IN_DOUBLEPRECISION                 # initial conditions are in double precision
+SIDM=2                                #activate and set types
+SIDM_STATES=2                         #number of DM states (for inelastic models)
+SIDM_REACTIONS=12                      #number of scatter reactions (for inelasitc models)
+FOF_SECONDARY_LINK_TYPES=4   # 2^type for the types linked to nearest primaries
