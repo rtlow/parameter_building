@@ -1,0 +1,116 @@
+# code dir is the highest level division
+0:
+  type: DREAMS
+  IC: 948
+  DM_type: CDM
+  hydro_type: HY
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+1:
+  type: DREAMS
+  IC: 948
+  DM_type: CDM
+  hydro_type: DM
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+
+2:
+  type: DREAMS
+  IC: 948
+  DM_type: SIDM
+  power: power0
+  sigma: 1
+  hydro_type: HY
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+3:
+  type: DREAMS
+  IC: 948
+  DM_type: SIDM
+  power: power0
+  sigma: 1
+  hydro_type: DM
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+4:
+  type: DREAMS
+  IC: 948
+  DM_type: SIDM
+  power: powerm2
+  sigma: 1
+  hydro_type: HY
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+5:
+  type: DREAMS
+  IC: 948
+  DM_type: SIDM
+  power: powerm2
+  sigma: 1
+  hydro_type: DM
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+6:
+  type: DREAMS
+  IC: 948
+  DM_type: 2cDM
+  power: power00
+  sigma: 1
+  V_k: 100
+  hydro_type: HY
+  boxsize: 50
+  nodes: 4
+  mem_size: 8
+  softening_length: 0.441
+  heavy_fraction: 0.5
+7:
+  type: DREAMS
+  IC: 948
+  DM_type: 2cDM
+  power: power00
+  sigma: 1
+  V_k: 100
+  hydro_type: DM
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+  heavy_fraction: 0.5
+8:
+  type: DREAMS
+  IC: 948
+  DM_type: 2cDM
+  power: powerm2m2
+  sigma: 1
+  V_k: 100
+  hydro_type: HY
+  boxsize: 50
+  nodes: 4
+  mem_size: 8
+  softening_length: 0.441
+  heavy_fraction: 0.5
+9:
+  type: DREAMS
+  IC: 948
+  DM_type: 2cDM
+  power: powerm2m2
+  sigma: 1
+  V_k: 100
+  hydro_type: DM
+  boxsize: 50
+  nodes: 2
+  mem_size: 8
+  softening_length: 0.441
+  heavy_fraction: 0.5

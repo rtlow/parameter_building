@@ -1,5 +1,5 @@
-InitCondFile                                      ../RUNS/DREAMS_MW_zooms/{$IC-FILE}
-OutputDir                                         /home/r408l055/scratch/output/{$JOBSTRING}
+InitCondFile                                      ../RUNS/DREAMS_MW_zooms/ics_948
+OutputDir                                         /home/r408l055/scratch/output/2cDM_DREAMS948_DM_power00_sigma1_dir_7_Vkick100.00
 SnapshotFileBase                                  snap
 OutputListFilename                                ../TNGfiles/ExpansionList_128
 ICFormat                                          3
@@ -8,18 +8,18 @@ TimeLimitCPU                                      18000 %5hour
 CpuTimeBetRestartFile                             10800 %3hour
 ResubmitOn                                        1
 ResubmitCommand                                   /home/r408l055/projects/SIDM/code/doit-restart.sh
-MaxMemSize                                        {$MEMSIZE}
+MaxMemSize                                        8000
 TimeBegin                                         0.0078125
 TimeMax                                           1
 ComovingIntegrationOn                             1
 PeriodicBoundariesOn                              1
 
-CoolingOn                                         {$HY_FLAG}
-StarformationOn                                   {$HY_FLAG}
+CoolingOn                                         0
+StarformationOn                                   0
 
 Omega0                                            0.301712
 OmegaLambda                                       0.698288
-OmegaBaryon                                       {$OMEGA_BARYON}
+OmegaBaryon                                       0
 HubbleParam                                       0.6909
 BoxSize                                           100000
 OutputListOn                                      1
@@ -100,3 +100,8 @@ RefinementCriterion		1
 DerefinementCriterion		1
 
 %#CrossSectionPerMass_in_cgs      1.0
+% SIDM Parameters
+DtimeFac                                          0.0025
+DtimeFacLim                                       0.025
+SIDMDesNumNgb                                     32
+SIDMMaxNumNgbDeviation                            5
