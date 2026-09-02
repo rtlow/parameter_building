@@ -3,20 +3,20 @@
 #SBATCH --ntasks-per-node=32
 #SBATCH --mem-per-cpu={__MEMSIZE__}
 #SBATCH --time=6:00:00
-#SBATCH --mail-user=rtlow@ku.edu
+#SBATCH --mail-user={__EMAIL__}
 #SBATCH --mail-type=ALL
 #SBATCH --job-name={__JOBSTRING__}
 #SBATCH --partition=sixhour
 #SBATCH --constraint "intel"
 #SBATCH --constraint=ib
-#SBATCH -o /home/r408l055/scratch/logs/%x.%j.out
+#SBATCH -o {__LOG_DIR__}/%x.%j.out
 
 # Which code directory
 i={__CODE_DIR__}
 # Is this a restart run?
 RESTART={__RESTART__}
 # Point to output directory
-OUTDIR="/home/r408l055/scratch/output"
+OUTDIR="{__OUT_DIR__}"
 # Point to final snapshot
 FINAL_SNAP="${OUTDIR}/{__JOBSTRING__}/snap_127.hdf5"
 
@@ -26,7 +26,9 @@ RESTART_DIR="${OUTDIR}/{__JOBSTRING__}/restartfiles/"
 JOBNAME=$SLURM_JOB_NAME
 PARAM='{__PARAM_FILE__}'
 PARAM_PATH="../RUNS/DREAMS_MW_zooms/${PARAM}"
-LOG_PATH=/home/r408l055/scratch/logs/LOG_${JOBNAME}_$SLURM_JOB_ID
+LOG_PATH={__LOG_DIR__}/LOG_${JOBNAME}_$SLURM_JOB_ID
+
+# TODO: use python for go/no-go instead
 
 # Flags for iteration go/no-go
 RESTART_EXISTS=1
@@ -35,14 +37,15 @@ N_RUN_TERMINATED=0
 N_EXISTING_RUNS=0
 
 GO=0
-# Actual run starting code
-~/remove_core.sh
 
-source /home/r408l055/modules.sh
+# Actual run starting code
+{__CLUSTER_CONTENT_DIR__}/scripts/remove_core.sh
+
+source {__CLUSTER_CONTENT_DIR__}/scripts/modules.sh
 
 srun --mpi=pmix_v5 ./Arepo $PARAM_PATH $RESTART > $LOG_PATH
 
-~/remove_core.sh
+{__CLUSTER_CONTENT_DIR__}/scripts/remove_core.sh
 
 # Iteration go/no-go logic
 N_RESTART=$(($SLURM_JOB_NUM_NODES*$SLURM_NTASKS_PER_NODE))
@@ -51,8 +54,8 @@ N_RESTART=$(($SLURM_JOB_NUM_NODES*$SLURM_NTASKS_PER_NODE))
 if [ -f "$FINAL_SNAP" ]; then
 	N_FINAL_SNAP_EXISTS=0
 	echo "Final snapshot for Job $JOBNAME was written. Bye!"
-  ~/run-gen-pk-submit.sh "${OUTDIR}/{__JOBSTRING__}/"
-  sbatch ~/run-rockstar-dir.sh "${OUTDIR}/{__JOBSTRING__}/"
+  {__CLUSTER_CONTENT_DIR__}/scripts/run-gen-pk-submit.sh "${OUTDIR}/{__JOBSTRING__}/"
+  sbatch {__CLUSTER_CONTENT_DIR__}/scripts/run-rockstar-dir.sh "${OUTDIR}/{__JOBSTRING__}/"
 else
   N_FINAL_SNAP_EXISTS=1
   echo "Still snapshots to go..."

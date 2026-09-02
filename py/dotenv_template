@@ -1,0 +1,10 @@
+EMAIL=
+
+# where log files should go
+LOG_DIR=
+
+# where simulation output should go
+OUT_DIR=
+
+# where the cluster_content repo lives
+CLUSTER_CONTENT_DIR=
