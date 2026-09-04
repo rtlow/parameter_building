@@ -52,9 +52,12 @@ def main():
     scatter_matrix_SIDM = '../file_parts/scatter_matrix_SIDM.txt'
     scatter_states_SIDM = '../file_parts/scatter_states_SIDM.txt'
 
+    makefile = '../file_parts/Makefile'
 
     double_input = True # TODO: parse from param file
 
+    # TODO: read from expansionlist to get expected final snapshot number
+    # TODO: fill out and create what you can for run_info.json here
 
     with open(hyp_param_file, 'r') as f:
         d = yaml.load(f, Loader=yaml.SafeLoader)
@@ -216,6 +219,8 @@ def main():
                 f.write(doit_restart_text)
             with open(config_out, 'w') as f:
                 f.write(config_text)
+
+            shutil.copyfile(makefile, out_dir + 'Makefile')
         else:
             print(param_text)
             print(doit_text)

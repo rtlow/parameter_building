@@ -18,7 +18,7 @@ RESTART={__RESTART__}
 # Point to output directory
 OUTDIR="{__OUT_DIR__}"
 # Point to final snapshot
-FINAL_SNAP="${OUTDIR}/{__JOBSTRING__}/snap_127.hdf5"
+FINAL_SNAP="${OUTDIR}/{__JOBSTRING__}/snap_127.hdf5" # TODO: calculate and grab final snapshot number
 
 
 # Modification is rarely needed
