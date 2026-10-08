@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import shutil
 import argparse
 from dotenv import dotenv_values
@@ -16,7 +17,7 @@ def main():
     dry_run = args.dry_run
 
     # output directory TODO: parse?
-    base_out = '../param/'
+    base_out = PROJECT_ROOT / 'param/'
 
     # dotenv parsing
     config = dotenv_values(".env")
@@ -26,33 +27,34 @@ def main():
     C = 300000 # km/s
 
 
-    # TODO: better file pathing to account for different CWDs
+    SCRIPT_DIR = Path(__file__).resolve().parent
+    PROJECT_ROOT = SCRIPT_DIR.parent
     # file parts here
 
     # for parameter file
     # TODO: separate per sim type
-    # param_part = '../file_parts/param.part'
-    param_part = '../file_parts/param_DREAMS.part'
-    hydro_part = '../file_parts/hydro.part'
-    SIDM_part = '../file_parts/SIDM.part'
+    # param_part = PROJECT_ROOT / 'file_parts/param.part'
+    param_part = PROJECT_ROOT / 'file_parts/param_DREAMS.part'
+    hydro_part = PROJECT_ROOT / 'file_parts/hydro.part'
+    SIDM_part = PROJECT_ROOT / 'file_parts/SIDM.part'
 
     # for submission script
-    doit_part = '../file_parts/doit.part'
+    doit_part = PROJECT_ROOT / 'file_parts/doit.part'
 
     # for Config.sh
-    config_part = '../file_parts/Config.part'
-    config_DM_part = '../file_parts/Config-DM.part'
-    config_HY_part = '../file_parts/Config-Hydro.part'
-    config_2cDM_part = '../file_parts/Config-2cDM.part'
-    config_SIDM_part = '../file_parts/Config-SIDM.part'
-    config_Double_part = '../file_parts/Config-DoublePrecision.part'
+    config_part = PROJECT_ROOT / 'file_parts/Config.part'
+    config_DM_part = PROJECT_ROOT / 'file_parts/Config-DM.part'
+    config_HY_part = PROJECT_ROOT / 'file_parts/Config-Hydro.part'
+    config_2cDM_part = PROJECT_ROOT / 'file_parts/Config-2cDM.part'
+    config_SIDM_part = PROJECT_ROOT / 'file_parts/Config-SIDM.part'
+    config_Double_part = PROJECT_ROOT / 'file_parts/Config-DoublePrecision.part'
 
     # scatter matrices
-    scatter_matrix_2cDM = '../file_parts/scatter_matrix_2cDM.txt'
-    scatter_matrix_SIDM = '../file_parts/scatter_matrix_SIDM.txt'
-    scatter_states_SIDM = '../file_parts/scatter_states_SIDM.txt'
+    scatter_matrix_2cDM = PROJECT_ROOT / 'file_parts/scatter_matrix_2cDM.txt'
+    scatter_matrix_SIDM = PROJECT_ROOT / 'file_parts/scatter_matrix_SIDM.txt'
+    scatter_states_SIDM = PROJECT_ROOT / 'file_parts/scatter_states_SIDM.txt'
 
-    makefile = '../file_parts/Makefile'
+    makefile = PROJECT_ROOT / 'file_parts/Makefile'
 
     double_input = True # TODO: parse from param file
 
@@ -76,15 +78,15 @@ def main():
         if param_dict['type'] == 'box':
             job_label = f'L{param_dict['boxsize']}N{param_dict['N_part']}'
             ic_file = f'IC-L{param_dict['boxsize']}N{param_dict['N_part']}-{code_directory}'
-            arepo_out = f'../param/arepo/boxes/'
+            arepo_out = PROJECT_ROOT / 'param/arepo/boxes/'
         elif param_dict['type'] == 'DREAMS':
             job_label = f'DREAMS{param_dict['IC']}'
             ic_file = f'ics_{param_dict['IC']}'
-            arepo_out = '../param/arepo/DREAMS_MW_zooms/'
+            arepo_out = PROJECT_ROOT / 'param/arepo/DREAMS_MW_zooms/'
         elif param_dict['type'] == 'zoom':
             job_label = f'{param_dict['IC']}'
             ic_file = f'ics_{param_dict['IC']}'
-            arepo_out = f'../param/arepo/{param_dict['IC']}/'
+            arepo_out = PROJECT_ROOT / f'param/arepo/{param_dict['IC']}/'
 
         if param_dict['DM_type'] == 'CDM':
             job_string = param_dict['DM_type'] + f'_{job_label}_' + param_dict['hydro_type'] + '_' + directory
